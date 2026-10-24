@@ -6,6 +6,21 @@ export const TEXTOS = {
     servicioCaido: 'El servicio del clima no responde ahora. Inténtalo en unos minutos.',
     ubicacionNoDisponible: 'No pudimos obtener tu ubicación. Puedes buscar una ciudad por nombre.',
   },
+  recomendaciones: {
+    paraguas: 'Lleva paraguas',
+    abrigo: 'Lleva abrigo',
+    ninguna: 'Sin necesidad de paraguas ni abrigo',
+  },
+  uv: {
+    bajo: 'Bajo',
+    moderado: 'Moderado',
+    alto: 'Alto',
+    muyAlto: 'Muy alto',
+    extremo: 'Extremo',
+  },
+  dias: {
+    manana: 'Mañana',
+  },
   ui: {
     mensajeInicial: 'Busca una ciudad',
     usarUbicacion: 'Usar mi ubicación',
