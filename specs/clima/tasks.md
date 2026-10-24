@@ -1,12 +1,12 @@
 # Tareas: App del clima
 
-> Estado: borrador para aprobación (Fase 3). Se implementa una tarea a la vez, con un commit por tarea (`T-n: descripción`) y tests en verde antes de pasar a la siguiente (ver `AGENTS.md`).
+> Estado: aprobado (Fase 3). En ejecución (Fase 4). Se implementa una tarea a la vez, con un commit por tarea (`T-n: descripción`) y tests en verde antes de pasar a la siguiente (ver `AGENTS.md`).
 
 Los criterios `CA-xx` están en `spec.md`; el cómo está en `plan.md`.
 
 | ID | Descripción | Criterios que cubre | Responsable | Estado |
 |---|---|---|---|---|
-| T-1 | **Preparar el proyecto.** `package.json` con Vite, Vitest y jsdom; `index.html` con la estructura vacía; `.gitignore`; configuración de tests que hace fallar cualquier `fetch` real; un test de humo que pasa. Requisito: Node.js instalado (ya está: v24). | Base de AGENTS.md (tests sin red) | Claude | Pendiente |
+| T-1 | **Preparar el proyecto.** `package.json` con Vite, Vitest y jsdom; `index.html` con la estructura vacía; `.gitignore`; configuración de tests que hace fallar cualquier `fetch` real; un test de humo que pasa. Requisito: Node.js instalado (ya está: v24). | Base de AGENTS.md (tests sin red) | Claude | Hecha |
 | T-2 | **Textos y errores.** `errores.js` con `CiudadNoEncontrada`, `SinConexion`, `ServicioCaido`, `UbicacionNoDisponible` y sus mensajes exactos en español, centralizados en un objeto de textos. | CA-20, CA-23, CA-24, CA-25, CA-29 (mensajes) | Claude | Pendiente |
 | T-3 | **Unidades.** `unidades.js`: °C → °F redondeado, formato de temperatura, guardar y leer la unidad (°C por defecto) en `localStorage`, tolerando que no esté disponible. | CA-12, CA-13 (cálculo), CA-14 | Claude | Pendiente |
 | T-4 | **Reglas del clima.** En `clima.js`: descripción, ícono y fondo por código del cielo; regla de noche; nivel de UV; recomendación de paraguas/abrigo; nombre de los días ("Mañana" y días de la semana). Todo con funciones puras. | CA-06, CA-07, CA-08, CA-09, CA-16, CA-11 (nombres) | Claude | Pendiente |
