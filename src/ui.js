@@ -81,6 +81,27 @@ export function crearUI(doc = document) {
 
   botonUbicacion.addEventListener('click', () => manejadores.ubicacion?.());
 
+  // CA-31: con el teclado, ↓ desde la barra entra a la lista; ↑/↓ recorren las coincidencias
+  // y Enter elige la que está seleccionada (cada coincidencia es un botón).
+  campo.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'ArrowDown') return;
+    const primera = el.lista.querySelector('button');
+    if (primera) {
+      evento.preventDefault();
+      primera.focus();
+    }
+  });
+  el.lista.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'ArrowDown' && evento.key !== 'ArrowUp') return;
+    const botones = [...el.lista.querySelectorAll('button')];
+    const actual = botones.indexOf(doc.activeElement);
+    if (actual === -1) return;
+    evento.preventDefault();
+    const siguiente = actual + (evento.key === 'ArrowDown' ? 1 : -1);
+    if (siguiente < 0) campo.focus();
+    else botones[Math.min(siguiente, botones.length - 1)].focus();
+  });
+
   el.mensajeInicial.textContent = TEXTOS.ui.mensajeInicial;
 
   // Atribución que exige la licencia de los datos.
