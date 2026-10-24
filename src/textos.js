@@ -26,5 +26,8 @@ export const TEXTOS = {
     usarUbicacion: 'Usar mi ubicación',
     reintentar: 'Reintentar',
     miUbicacion: 'Mi ubicación',
+    buscar: 'Buscar',
+    etiquetaCiudad: 'Ciudad',
+    cargando: 'Cargando…',
   },
 };
