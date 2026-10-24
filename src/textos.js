@@ -25,5 +25,6 @@ export const TEXTOS = {
     mensajeInicial: 'Busca una ciudad',
     usarUbicacion: 'Usar mi ubicación',
     reintentar: 'Reintentar',
+    miUbicacion: 'Mi ubicación',
   },
 };
