@@ -41,6 +41,7 @@ export function crearUI(doc = document) {
     cargando: doc.getElementById('cargando'),
     lista: doc.getElementById('lista-ciudades'),
     clima: doc.getElementById('clima'),
+    aviso: doc.getElementById('aviso'),
   };
   const manejadores = { buscar: null, ubicacion: null, unidad: null };
   const estado = { modelo: null, unidad: UNIDAD_POR_DEFECTO };
@@ -228,6 +229,27 @@ export function crearUI(doc = document) {
 
     limpiarCoincidencias() {
       el.lista.replaceChildren();
+    },
+
+    // CA-23 a CA-27, CA-29: el aviso va aparte del clima, que nunca se borra por un error.
+    // "Reintentar" solo aparece si el error lo permite (sin conexión, servicio caído).
+    mostrarError(error, alReintentar) {
+      const mensaje = error?.mensaje ?? TEXTOS.errores.servicioCaido;
+      const hijos = [crear(doc, 'p', { clase: 'aviso-texto', texto: mensaje })];
+      if (error?.reintentable && alReintentar) {
+        const boton = crear(doc, 'button', {
+          clase: 'aviso-reintentar',
+          texto: TEXTOS.ui.reintentar,
+          attrs: { type: 'button', 'data-accion': 'reintentar' },
+        });
+        boton.addEventListener('click', () => alReintentar());
+        hijos.push(boton);
+      }
+      el.aviso.replaceChildren(...hijos);
+    },
+
+    limpiarError() {
+      el.aviso.replaceChildren();
     },
 
     mostrarClima(modelo, unidad = estado.unidad) {
