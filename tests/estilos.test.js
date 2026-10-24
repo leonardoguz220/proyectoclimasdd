@@ -58,3 +58,15 @@ describe('efecto vidrio (CA-15)', () => {
     expect(css).toMatch(/\.tarjeta\s*\{[^}]*-webkit-backdrop-filter:\s*blur\(/);
   });
 });
+
+describe('contraste del botón de unidad seleccionado (CA-17)', () => {
+  it('el texto del botón seleccionado tiene al menos 4.5:1 sobre su propio fondo', () => {
+    const regla = css.match(/\.unidad-boton\[aria-pressed="true"\]\s*\{([^}]*)\}/);
+    expect(regla, 'falta la regla del botón seleccionado').not.toBeNull();
+    const fondo = regla[1].match(/background:\s*(#[0-9a-f]{6})/i);
+    const color = regla[1].match(/color:\s*(#[0-9a-f]{6})/i);
+    expect(fondo, 'el fondo del botón seleccionado debe ser un color sólido').not.toBeNull();
+    expect(color, 'el botón seleccionado debe fijar su color de texto').not.toBeNull();
+    expect(contraste(hexARgb(color[1]), hexARgb(fondo[1]))).toBeGreaterThanOrEqual(4.5);
+  });
+});

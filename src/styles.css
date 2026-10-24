@@ -238,7 +238,8 @@ button:hover {
 }
 
 .unidad-boton[aria-pressed="true"] {
-  background: rgba(255, 255, 255, 0.28);
+  background: #ffffff;
+  color: #0f172a;
   font-weight: 700;
 }
 
