@@ -25,7 +25,8 @@ proyectoclimasdd/
 ├─ src/
 │  ├─ main.js               # arranque: conecta eventos con la lógica y la interfaz
 │  ├─ api.js                # buscarCiudades(), obtenerClima(), nombreDeUbicacion(); único módulo que usa fetch
-│  ├─ errores.js            # tipos de error y mensajes en español
+│  ├─ textos.js             # todos los textos de la interfaz en español (CA-20)
+│  ├─ errores.js            # tipos de error (con sus mensajes tomados de textos.js)
 │  ├─ clima.js              # convierte la respuesta de la API en el modelo de la app; reglas puras
 │  ├─ unidades.js           # °C ↔ °F y guardado de la unidad
 │  ├─ ui.js                 # dibuja pantalla, lista, tarjetas, errores y carga
