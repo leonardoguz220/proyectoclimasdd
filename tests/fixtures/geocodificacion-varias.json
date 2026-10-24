@@ -1,0 +1,55 @@
+{
+  "results": [
+    {
+      "id": 3871336,
+      "name": "Santiago",
+      "latitude": -33.45694,
+      "longitude": -70.64827,
+      "country": "Chile",
+      "country_code": "CL",
+      "admin1": "Región Metropolitana",
+      "timezone": "America/Santiago"
+    },
+    {
+      "id": 3492908,
+      "name": "Santiago",
+      "latitude": 19.45,
+      "longitude": -70.7,
+      "country": "República Dominicana",
+      "country_code": "DO",
+      "admin1": "Santiago",
+      "timezone": "America/Santo_Domingo"
+    },
+    {
+      "id": 3109642,
+      "name": "Santiago de Compostela",
+      "latitude": 42.88,
+      "longitude": -8.54,
+      "country": "España",
+      "country_code": "ES",
+      "admin1": "Galicia",
+      "timezone": "Europe/Madrid"
+    },
+    {
+      "id": 3922123,
+      "name": "Santiago",
+      "latitude": -17.84,
+      "longitude": -63.18,
+      "country": "Bolivia",
+      "country_code": "BO",
+      "admin1": "Santa Cruz",
+      "timezone": "America/La_Paz"
+    },
+    {
+      "id": 3991601,
+      "name": "Santiago",
+      "latitude": 20.63,
+      "longitude": -103.27,
+      "country": "México",
+      "country_code": "MX",
+      "admin1": "Jalisco",
+      "timezone": "America/Mexico_City"
+    }
+  ],
+  "generationtime_ms": 0.9
+}

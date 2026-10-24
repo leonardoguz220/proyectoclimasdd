@@ -1,3 +1,4 @@
+import { ServicioCaido } from './errores.js';
 import { TEXTOS } from './textos.js';
 
 // Reglas puras del clima: sin red ni DOM.
@@ -99,4 +100,74 @@ export function nombreDelDia(fecha, esManana = false) {
     new Date(anio, mes - 1, dia),
   );
   return nombre.charAt(0).toUpperCase() + nombre.slice(1);
+}
+
+// Un dato ausente se guarda como null; la interfaz lo muestra como "—" (CA-33).
+function dato(lista, indice) {
+  return lista?.[indice] ?? null;
+}
+
+// De "2026-10-24T05:58" saca "05:58".
+function soloHora(texto) {
+  return typeof texto === 'string' && texto.includes('T') ? texto.split('T')[1] : null;
+}
+
+// Convierte la respuesta del pronóstico en el modelo de la app (CA-05, CA-10, CA-11).
+// Las temperaturas quedan siempre en °C; la unidad se aplica al mostrar.
+export function normalizarClima(respuesta, ciudad) {
+  const actual = respuesta?.current;
+  const diario = respuesta?.daily;
+  if (!actual || !diario || !Array.isArray(diario.time) || diario.time.length === 0) {
+    throw new ServicioCaido();
+  }
+
+  const amanecer = dato(diario.sunrise, 0);
+  const atardecer = dato(diario.sunset, 0);
+  const codigo = dato({ 0: actual.weather_code }, 0);
+  const cielo = cieloPorCodigo(codigo);
+  const probabilidadLluvia = dato(diario.precipitation_probability_max, 0);
+  const sensacion = actual.apparent_temperature ?? null;
+
+  // Índices 1 a 3: los 3 días siguientes a hoy (CA-10).
+  const pronostico = [1, 2, 3]
+    .filter((i) => diario.time[i] !== undefined)
+    .map((i) => {
+      const cieloDia = cieloPorCodigo(dato(diario.weather_code, i));
+      return {
+        fecha: diario.time[i],
+        nombre: nombreDelDia(diario.time[i], i === 1),
+        descripcion: cieloDia.descripcion,
+        icono: cieloDia.icono,
+        maxima: dato(diario.temperature_2m_max, i),
+        minima: dato(diario.temperature_2m_min, i),
+        probabilidadLluvia: dato(diario.precipitation_probability_max, i),
+      };
+    });
+
+  const uv = dato(diario.uv_index_max, 0);
+
+  return {
+    ciudad,
+    fondo: fondoPara(codigo, esDeNoche(actual.time, amanecer, atardecer)),
+    actual: {
+      temperatura: actual.temperature_2m ?? null,
+      sensacion,
+      descripcion: cielo.descripcion,
+      icono: cielo.icono,
+      humedad: actual.relative_humidity_2m ?? null,
+      viento: actual.wind_speed_10m ?? null,
+    },
+    hoy: {
+      maxima: dato(diario.temperature_2m_max, 0),
+      minima: dato(diario.temperature_2m_min, 0),
+      probabilidadLluvia,
+      lluviaMm: dato(diario.precipitation_sum, 0),
+      uv,
+      nivelUV: nivelUV(uv),
+      amanecer: soloHora(amanecer),
+      atardecer: soloHora(atardecer),
+    },
+    recomendaciones: recomendaciones(probabilidadLluvia, sensacion),
+    pronostico,
+  };
 }
