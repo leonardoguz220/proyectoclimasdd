@@ -42,6 +42,7 @@ export function crearUI(doc = document) {
     lista: doc.getElementById('lista-ciudades'),
     clima: doc.getElementById('clima'),
     aviso: doc.getElementById('aviso'),
+    pie: doc.querySelector('.pie'),
   };
   const manejadores = { buscar: null, ubicacion: null, unidad: null };
   const estado = { modelo: null, unidad: UNIDAD_POR_DEFECTO };
@@ -81,6 +82,15 @@ export function crearUI(doc = document) {
   botonUbicacion.addEventListener('click', () => manejadores.ubicacion?.());
 
   el.mensajeInicial.textContent = TEXTOS.ui.mensajeInicial;
+
+  // Atribución que exige la licencia de los datos.
+  if (el.pie) {
+    const enlace = crear(doc, 'a', {
+      texto: 'Open-Meteo.com',
+      attrs: { href: 'https://open-meteo.com/', target: '_blank', rel: 'noopener' },
+    });
+    el.pie.replaceChildren(`${TEXTOS.ui.atribucion} `, enlace);
+  }
 
   // CA-12, CA-13: dos botones °C / °F; al elegir uno solo se redibuja con el modelo guardado.
   function selectorUnidad() {
@@ -225,6 +235,10 @@ export function crearUI(doc = document) {
           return item;
         }),
       );
+    },
+
+    enfocarBusqueda() {
+      campo.focus();
     },
 
     limpiarCoincidencias() {

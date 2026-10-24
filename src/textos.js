@@ -29,6 +29,7 @@ export const TEXTOS = {
     buscar: 'Buscar',
     etiquetaCiudad: 'Ciudad',
     cargando: 'Cargando…',
+    atribucion: 'Datos del clima:',
   },
   clima: {
     maxima: 'Máx.',

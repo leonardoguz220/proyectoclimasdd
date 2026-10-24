@@ -1,1 +1,3 @@
-// Arranque de la app. Se completa en T-10.
+import { iniciarApp } from './app.js';
+
+iniciarApp();

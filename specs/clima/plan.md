@@ -23,7 +23,8 @@ proyectoclimasdd/
 ├─ package.json
 ├─ specs/clima/             # spec.md, plan.md, tasks.md
 ├─ src/
-│  ├─ main.js               # arranque: conecta eventos con la lógica y la interfaz
+│  ├─ main.js               # arranque: llama a iniciarApp()
+│  ├─ app.js                # iniciarApp(): conecta interfaz y API (buscar, elegir, ubicación, reintentar); todo inyectable para tests
 │  ├─ api.js                # buscarCiudades(), obtenerClima(), nombreDeUbicacion(); único módulo que usa fetch
 │  ├─ textos.js             # todos los textos de la interfaz en español (CA-20)
 │  ├─ errores.js            # tipos de error (con sus mensajes tomados de textos.js)
